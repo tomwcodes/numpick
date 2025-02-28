@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Picker</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Random Number Picker</h1>
+        </header>
+        
+        <div id="auth-container">
+            <div id="login-container">
+                <h2>Please sign in to continue</h2>
+                <button id="login-button" class="btn">Sign in with Google</button>
+            </div>
+            
+            <div id="user-container" class="hidden">
+                <div id="user-info">
+                    <img id="user-pic" src="./placeholder.png" alt="Profile picture">
+                    <div id="user-name"></div>
+                    <div id="user-number"></div>
+                    <button id="logout-button" class="btn">Sign Out</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="users-list-container" class="hidden">
+            <h2>Users and Their Numbers</h2>
+            <ul id="users-list"></ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

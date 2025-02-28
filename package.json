@@ -1,0 +1,29 @@
+{
+  "name": "random-number-picker",
+  "version": "1.0.0",
+  "description": "A web app that assigns random numbers to authenticated users",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "echo 'Open index.html in your browser to run the application'"
+  },
+  "keywords": [
+    "random",
+    "number",
+    "firebase",
+    "authentication"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "verbose": true,
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  }
+}
