@@ -53,7 +53,7 @@ global.firebase = {
     firestore: jest.fn().mockReturnValue({
         collection: mockCollection,
         FieldValue: {
-            serverTimestamp: jest.fn()
+            serverTimestamp: jest.fn().mockReturnValue(() => 'mocked-timestamp')
         }
     })
 };
@@ -101,7 +101,7 @@ const saveUserToDatabase = async (user, number) => {
         
         updateUserNumberUI(number);
     } catch (error) {
-        console.error('Error saving user to database:', error);
+        console.error('Error saving user to database: ', error);
     }
 };
 

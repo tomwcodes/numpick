@@ -42,11 +42,11 @@ global.firebase = {
         FieldValue: {
             serverTimestamp: jest.fn()
         }
-    }),
-    auth: {
-        GoogleAuthProvider: mockGoogleAuthProvider
-    }
+    })
 };
+
+// Add GoogleAuthProvider to the auth mock
+global.firebase.auth.GoogleAuthProvider = mockGoogleAuthProvider;
 
 // Import app.js functions (assuming they're exported)
 // Note: For this test to work, app.js would need to be modified to export these functions
