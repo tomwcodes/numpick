@@ -1,16 +1,8 @@
 // Random Number Picker - Application Logic
 
-// Firebase configuration
-// Note: In a production environment, these values should be stored securely
-const firebaseConfig = {
-    apiKey: "AIzaSyDE9Okgc7kB5wHk_n4QjYm6e63gxrDsFTI",
-    authDomain: "numpick-77a82.firebaseapp.com",
-    projectId: "numpick-77a82",
-    storageBucket: "numpick-77a82.firebasestorage.app",
-    messagingSenderId: "716371207032",
-    appId: "1:716371207032:web:a7424af1b7e41479495e8d",
-    measurementId: "G-RTG3NLJKH9"
-};
+// Import Firebase configuration from external file
+// This keeps sensitive data out of version control
+import firebaseConfig from './firebase-config.js';
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
