@@ -121,8 +121,8 @@ function showLoginUI() {
 function showUserInfo(user) {
     // Update user info UI
     userPic.src = user.photoURL || './placeholder.png';
-    userName.textContent = user.displayName;
-    
+    userName.textContent = `Name: ${user.displayName}`;
+
     // Show user container, hide login container
     loginContainer.classList.add('hidden');
     userContainer.classList.remove('hidden');
@@ -130,7 +130,7 @@ function showUserInfo(user) {
 }
 
 function updateUserNumberUI(number) {
-    userNumber.textContent = `Your number: ${number}`;
+    userNumber.textContent = `Number: ${number}`;
 }
 
 function renderUsersList(userDocs) {
