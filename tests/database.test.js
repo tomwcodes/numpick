@@ -44,8 +44,7 @@ const mockCollection = jest.fn().mockReturnValue({
     doc: jest.fn().mockReturnValue({
         get: mockGet,
         set: mockSet
-    }),
-    orderBy: mockOrderBy
+    })
 });
 
 // Mock global firebase object
@@ -53,7 +52,7 @@ global.firebase = {
     firestore: jest.fn().mockReturnValue({
         collection: mockCollection,
         FieldValue: {
-            serverTimestamp: jest.fn().mockReturnValue(() => 'mocked-timestamp')
+            serverTimestamp: jest.fn().mockReturnValue('mocked-timestamp')
         }
     })
 };
@@ -71,7 +70,7 @@ const checkUserInDatabase = async (user) => {
         const db = firebase.firestore();
         const usersCollection = db.collection('users');
         const userDoc = await usersCollection.doc(user.uid).get();
-        
+
         if (!userDoc.exists) {
             // New user, generate random number and save to database
             const randomNum = 42; // Mock random number
@@ -98,7 +97,7 @@ const saveUserToDatabase = async (user, number) => {
             number: number,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        
+
         updateUserNumberUI(number);
     } catch (error) {
         console.error('Error saving user to database: ', error);
@@ -132,39 +131,46 @@ describe('Database Operations', () => {
     test('checkUserInDatabase calls saveUserToDatabase for new users', async () => {
         // Set up mock to indicate user doesn't exist
         mockDoc.exists = false;
-        
+
         await checkUserInDatabase(mockUser);
-        
+
         // Verify Firestore was queried
         expect(mockCollection).toHaveBeenCalledWith('users');
         expect(mockGet).toHaveBeenCalled();
-        
+
         // Verify saveUserToDatabase was called
-        expect(mockSet).toHaveBeenCalled();
+        expect(mockSet).toHaveBeenCalledWith({
+            uid: 'test-user-123',
+            name: 'Test User',
+            email: 'test@example.com',
+            photoURL: 'https://example.com/photo.jpg',
+            number: 42,
+            createdAt: 'mocked-timestamp'
+        });
         expect(updateUserNumberUI).toHaveBeenCalledWith(42);
     });
 
     test('checkUserInDatabase updates UI for existing users', async () => {
         // Set up mock to indicate user exists
         mockDoc.exists = true;
-        
+
         await checkUserInDatabase(mockUser);
-        
+
         // Verify Firestore was queried
         expect(mockCollection).toHaveBeenCalledWith('users');
         expect(mockGet).toHaveBeenCalled();
-        
+
         // Verify UI was updated with stored number
         expect(mockDoc.data).toHaveBeenCalled();
         expect(updateUserNumberUI).toHaveBeenCalledWith(42);
-        
+
         // Verify saveUserToDatabase was NOT called
         expect(mockSet).not.toHaveBeenCalled();
     });
 
     test('saveUserToDatabase saves user data to Firestore', async () => {
         await saveUserToDatabase(mockUser, 42);
-        
+
         // Verify Firestore was updated
         expect(mockCollection).toHaveBeenCalledWith('users');
         expect(mockSet).toHaveBeenCalledWith({
@@ -173,20 +179,20 @@ describe('Database Operations', () => {
             email: 'test@example.com',
             photoURL: 'https://example.com/photo.jpg',
             number: 42,
-            createdAt: expect.any(Function)
+            createdAt: 'mocked-timestamp'
         });
-        
+
         // Verify UI was updated
         expect(updateUserNumberUI).toHaveBeenCalledWith(42);
     });
 
     test('loadAllUsers retrieves users ordered by number', async () => {
         await loadAllUsers();
-        
+
         // Verify Firestore query
-        expect(mockCollection).toHaveBeenCalledWith('users');
-        expect(mockOrderBy).toHaveBeenCalledWith('number', 'asc');
-        
+        expect(mockCollection).toHaveBeenCalledWith("users");
+        expect(mockOrderBy).toHaveBeenCalledWith("number", "asc");
+
         // Verify UI was updated with user list
         expect(renderUsersList).toHaveBeenCalledWith(mockDocs);
     });
