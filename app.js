@@ -3,16 +3,18 @@
 // Firebase configuration
 // Note: In a production environment, these values should be stored securely
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDE9Okgc7kB5wHk_n4QjYm6e63gxrDsFTI",
+    authDomain: "numpick-77a82.firebaseapp.com",
+    projectId: "numpick-77a82",
+    storageBucket: "numpick-77a82.firebasestorage.app",
+    messagingSenderId: "716371207032",
+    appId: "1:716371207032:web:a7424af1b7e41479495e8d",
+    measurementId: "G-RTG3NLJKH9"
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const analytics = firebase.analytics();
 
 // Get references to DOM elements
 const loginButton = document.getElementById('login-button');
